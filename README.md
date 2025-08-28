@@ -52,12 +52,3 @@ yarn build
 
 ### Add Todo  
 ![Task Completed](./screenshots/t2.JPG)  
-
-# 📝 Test Todo App
-This is a test readme file.
-git checkout main
-git pull
-# Open README.md in editor to verify content
-git add README.md
-git commit -m "Ensure README content"
-git push origin main
