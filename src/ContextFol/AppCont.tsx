@@ -20,7 +20,7 @@ interface ReactHooksExp{
 }
 export const AppCont =React.createContext<ReactHooksExp | null>(null)
 export const ContextProvider: React.FC<PropsChildren> = (props) => {
-    const [getAllTodo,setAllTodo]=useState<TodoData[]|null>([{todoTitle:"one",todoContent:"two",isCompleted:false}])
+    const [getAllTodo,setAllTodo]=useState<TodoData[]|null>(null)
     const [getUpdateTodo,setUdpateTodo]=useState<TodoData|null>(null)
     return (
         <AppCont.Provider value={{getAllTodo,setAllTodo,getUpdateTodo,setUdpateTodo}}>

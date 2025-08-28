@@ -4,12 +4,19 @@ import { AppCont } from "../ContextFol/AppCont"
 interface TodoData {
     todoTitle: string,
     todoContent: string,
-    isCompleted: boolean
+    isCompleted: boolean,
+    id:string
 }
 
 type elem = TodoData
 
-const TodoView: React.FC<elem> = ({ elem, id }) => {
+type datatype={
+    key:string,
+    elem:elem,
+    id:string
+}
+
+const TodoView: React.FC<datatype> = (datatype) => {
 
 
     const getContext = useContext(AppCont)
@@ -18,7 +25,7 @@ const TodoView: React.FC<elem> = ({ elem, id }) => {
             case "completed":
                 getContext?.setAllTodo((prev) => {
                     const arr = prev ? prev.map((todo) => {
-                        return todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+                        return todo.id === datatype.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
                     }) :
                         null
                     console.log(arr)
@@ -29,12 +36,12 @@ const TodoView: React.FC<elem> = ({ elem, id }) => {
             case "remove":
                 getContext?.setAllTodo((todos) => {
                     return todos ? todos.filter((todo) => {
-                        return todo.id != id
+                        return todo.id != datatype.id
                     }) : null
                 })
                 return
             case "edit":
-                getContext?.setUdpateTodo(elem)
+                getContext?.setUdpateTodo(datatype.elem)
                 return
             default:
                 return
@@ -49,19 +56,19 @@ const TodoView: React.FC<elem> = ({ elem, id }) => {
             border: '2px solid black',
             padding: '0px 20px',
             marginTop: "30px",
-            pointerEvents: elem.isCompleted ? "none" : "auto",
-            opacity: elem.isCompleted ? "0.6" : "1",
+            pointerEvents: datatype.elem.isCompleted ? "none" : "auto",
+            opacity: datatype.elem.isCompleted ? "0.6" : "1",
             borderRadius: "5px"
         }}  >
             <div>
                 <h1 style={{
                     marginTop: '0px',
                     marginBottom: '5px'
-                }}>{elem.todoTitle}</h1>
+                }}>{datatype.elem.todoTitle}</h1>
                 <p style={{
                     marginTop: '0',
                     fontSize: '.9rem'
-                }}>{elem.todoContent} Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quas unde temporibus perferendis nulla facilis recusandae dolorum neque. Modi at ab tempore veritatis quo, blanditiis numquam assumenda deleniti corporis distinctio? </p>
+                }}>{datatype.elem.todoContent} Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quas unde temporibus perferendis nulla facilis recusandae dolorum neque. Modi at ab tempore veritatis quo, blanditiis numquam assumenda deleniti corporis distinctio? </p>
 
             </div>
             <select name="options" id="" defaultValue={"update"} onChange={(e) => changeFun(e)} >

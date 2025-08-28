@@ -17,26 +17,24 @@ const AddTodo: React.FC = () => {
     if (!context) {
         throw new Error("AppCont must be used inside ConextProvider");
     }
-    const { getAllTodo, setAllTodo, getUpdateTodo ,setUdpateTodo} = context
+    const { getAllTodo, setAllTodo, getUpdateTodo, setUdpateTodo } = context
     const messageRef = useRef<HTMLDivElement>(null)
-    const [getTodoTitle, setTodoTitle] = useState<string>("")
-    const [getTodoContent, setTodoContent] = useState<string>("")
+    const [getTodoTitle, setTodoTitle] = useState<string|undefined>(undefined)
+    const [getTodoContent, setTodoContent] = useState<string|undefined>(undefined)
 
     const AddTodoFun = (e: React.MouseEvent<HTMLButtonElement>) => {
-        if(e.target.innerHTML.trim()==="Edit"){
-            setAllTodo((todos)=>{
-               return todos
-                ? todos.map((todo)=>{
-                    if(  String(todo.id) === String(getUpdateTodo.id)){
-                        console.log(String(todo.id).length, String(getUpdateTodo.id).length,"  ",getUpdateTodo)
-                        console.log(" id ",todo.id, "  ",getUpdateTodo.id)
-                        return {...todo,todoTitle:getTodoTitle,todoContent:getTodoContent}
-                    }
-                    return todo
-                }):null
+        if (e.target.innerHTML.trim() === "Edit") {
+            setAllTodo(todos => {
+                return todos
+                    ? todos.map((todo) => {
+                        if (String(todo.id) === String(getUpdateTodo?.id)) {
+                            return { ...todo, todoTitle: getTodoTitle, todoContent: getTodoContent }
+                        }
+                        return todo
+                    }) : null
 
             })
-setUdpateTodo("")
+            setUdpateTodo(null)
         }
         else {
             setAllTodo((prev) => {
@@ -50,17 +48,17 @@ setUdpateTodo("")
         setTodoContent("")
     }
 
-  
+
 
     useEffect(() => {
         console.log(messageRef.current)
         messageRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [getAllTodo])
 
-    useEffect(()=>{
+    useEffect(() => {
         setTodoTitle(getUpdateTodo?.todoTitle)
         setTodoContent(getUpdateTodo?.todoContent)
-    },[getUpdateTodo])
+    }, [getUpdateTodo])
     return <>
         <div style={{
             width: "60%",
@@ -85,7 +83,7 @@ setUdpateTodo("")
                     padding: "5px 10px",
                     fontWeight: "bold",
                     cursor: "pointer"
-                }} onClick={(e) => AddTodoFun(e)} > {getUpdateTodo ? "Edit":"Add Todo"} </button>
+                }} onClick={(e) => AddTodoFun(e)} > {getUpdateTodo ? "Edit" : "Add Todo"} </button>
             </div>
             <div style={{ width: "100%", marginTop: '20px' }}>
                 {
