@@ -48,7 +48,7 @@ yarn build
 ## 📸 Screenshots  
 
 ### Home Page  
-![Task](./screenshots/t1.JPG)  
+![Task](https://github.com/Sachin-Shah-25/Todo-/blob/main/screenshots/t1.JPG?raw=true)  
 
 ### Add Todo  
 ![Task Completed](./screenshots/t2.JPG)  
