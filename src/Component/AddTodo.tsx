@@ -3,13 +3,9 @@ import { AppCont } from '../ContextFol/AppCont'
 import TodoView from './TodoView'
 import { v4 as uuidv4 } from "uuid";
 
-type todoType = {
-    todoTitle: string,
-    todoContent: string,
-    isCompleted: boolean,
-    id: string
 
-}
+let col=30
+let row=10
 const AddTodo: React.FC = () => {
 
     const context = useContext(AppCont);
@@ -22,8 +18,9 @@ const AddTodo: React.FC = () => {
     const [getTodoTitle, setTodoTitle] = useState<string|undefined>(undefined)
     const [getTodoContent, setTodoContent] = useState<string|undefined>(undefined)
 
-    const AddTodoFun = (e: React.MouseEvent<HTMLButtonElement>) => {
-        if (e.target.innerHTML.trim() === "Edit") {
+        const AddTodoFun = (e: React.MouseEvent<HTMLButtonElement>) => {
+            const button = e.target as HTMLButtonElement;
+            if (button.innerHTML.trim() === "Edit") {
             setAllTodo(todos => {
                 return todos
                     ? todos.map((todo) => {
@@ -77,7 +74,7 @@ const AddTodo: React.FC = () => {
                     width: "100%",
                     padding: "6px 9px"
                 }} type="text" name="" id="" onChange={(e) => setTodoTitle(e.target.value)} value={getTodoTitle} placeholder='Title' />
-                <textarea name="" id="" placeholder='Discription....' onChange={(e) => setTodoContent(e.target.value)} value={getTodoContent} cols="30" rows="10"
+                <textarea name="" id="" placeholder='Discription....' onChange={(e) => setTodoContent(e.target.value)} value={getTodoContent} cols={col} rows={row}
                     style={{ resize: 'none', width: "100%", padding: "6px 9px", fontFamily: "sans-serif" }} ></textarea>
                 <button style={{
                     padding: "5px 10px",
@@ -87,7 +84,7 @@ const AddTodo: React.FC = () => {
             </div>
             <div style={{ width: "100%", marginTop: '20px' }}>
                 {
-                    getAllTodo && getAllTodo.map((elem: todoType) => {
+                    getAllTodo && getAllTodo.map((elem) => {
                         return <TodoView key={elem.id} elem={elem} id={elem.id} ></TodoView>
                     })
                 }

@@ -5,10 +5,10 @@ interface PropsChildren {
     children: React.ReactNode
 }
 interface TodoData{
-    todoTitle:string,
-    todoContent:string,
-    isCompleted:boolean,
-    id:string
+  id: string;
+  todoTitle: string | undefined;
+  todoContent: string | undefined;
+  isCompleted: boolean;
 }
 
 

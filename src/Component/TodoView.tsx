@@ -2,17 +2,16 @@ import React, { useContext } from "react"
 import { AppCont } from "../ContextFol/AppCont"
 
 interface TodoData {
-    todoTitle: string,
-    todoContent: string,
-    isCompleted: boolean,
-    id:string
+  id: string;
+  todoTitle: string | undefined;
+  todoContent: string | undefined;
+  isCompleted: boolean;
 }
 
-type elem = TodoData
 
 type datatype={
     key:string,
-    elem:elem,
+    elem:TodoData,
     id:string
 }
 
